@@ -11,7 +11,7 @@
     "check": "tsc",
     "test": "jest",
     "watch": "parcel watch",
-    "preversion": "npm run check && npm run test && npm run build "
+    "preversion": "npm run check && npm run test && npm run build && git add dist"
   },
   "author": "Prasanna Venkatesh T S <vipranarayan14@gmail.com>",
   "license": "MIT",

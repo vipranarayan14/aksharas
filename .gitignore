@@ -1,0 +1,14 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Editor directories and files
+.vscode/*
+.DS_Store
+
+# Local files
+*.local
+.parcel-cache
+node_modules
+_temp

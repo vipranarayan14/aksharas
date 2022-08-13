@@ -15,7 +15,8 @@
     "test": "jest",
     "watch": "parcel watch",
     "preversion": "npm run check && npm run test",
-    "version": "npm run build && git add dist"
+    "version": "npm run build && git add dist",
+    "release": "git push && git push --tags"
   },
   "author": "Prasanna Venkatesh T S <vipranarayan14@gmail.com>",
   "license": "MIT",

@@ -374,7 +374,8 @@ const $149c1bd638913645$var$analyse = (input)=>{
     };
 };
 const $149c1bd638913645$var$Aksharas = {
-    analyse: $149c1bd638913645$var$analyse
+    analyse: $149c1bd638913645$var$analyse,
+    TokenType: $66d137fe0087513e$export$f435f793048e7a0f
 };
 var $149c1bd638913645$export$2e2bcd8739ae039 = $149c1bd638913645$var$Aksharas;
 

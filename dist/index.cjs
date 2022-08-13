@@ -384,7 +384,8 @@ const $882b6d93070905b3$var$analyse = (input)=>{
     };
 };
 const $882b6d93070905b3$var$Aksharas = {
-    analyse: $882b6d93070905b3$var$analyse
+    analyse: $882b6d93070905b3$var$analyse,
+    TokenType: $3aefcdddac337967$export$f435f793048e7a0f
 };
 var $882b6d93070905b3$export$2e2bcd8739ae039 = $882b6d93070905b3$var$Aksharas;
 

@@ -26,6 +26,7 @@ type Results = {
 };
 declare const Aksharas: {
     analyse: (input: string) => Results;
+    TokenType: typeof TokenType;
 };
 export default Aksharas;
 

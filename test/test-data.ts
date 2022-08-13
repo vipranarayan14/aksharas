@@ -1,6 +1,6 @@
 import { TokenType, TokenAttributes } from "../src/token";
 
-interface TestDatum {
+type TestData = {
   input: string;
   expectedTokens: {
     type: TokenType;
@@ -9,9 +9,10 @@ interface TestDatum {
     to: number;
     attributes?: TokenAttributes;
   }[];
-}
+}[];
 
-export const testData: TestDatum[] = [
+export const testData: TestData = [
+  // With invalid chars
   {
     input: "्त",
     expectedTokens: [
@@ -31,6 +32,67 @@ export const testData: TestDatum[] = [
     ],
   },
   {
+    input: "म्॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "म्",
+        from: 0,
+        to: 1,
+        attributes: { varnasLength: 1 },
+      },
+      {
+        type: TokenType.Invalid,
+        value: "॑",
+        from: 2,
+        to: 2,
+      },
+    ],
+  },
+  {
+    input: "काा",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "का",
+        from: 0,
+        to: 1,
+        attributes: { varnasLength: 2 },
+      },
+      {
+        type: TokenType.Invalid,
+        value: "ा",
+        from: 2,
+        to: 2,
+      },
+    ],
+  },
+  {
+    input: "१॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Symbol,
+        value: "१",
+        from: 0,
+        to: 0,
+      },
+      {
+        type: TokenType.Invalid,
+        value: "॑",
+        from: 1,
+        to: 1,
+      },
+      {
+        type: TokenType.Invalid,
+        value: "॒",
+        from: 2,
+        to: 2,
+      },
+    ],
+  },
+
+  // Without any invalid chars
+  {
     input: "अ॒",
     expectedTokens: [
       {
@@ -39,6 +101,54 @@ export const testData: TestDatum[] = [
         from: 0,
         to: 1,
         attributes: { varnasLength: 1 },
+      },
+    ],
+  },
+  {
+    input: "च॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "च॒॑",
+        from: 0,
+        to: 2,
+        attributes: { varnasLength: 2 },
+      },
+    ],
+  },
+  {
+    input: "वः॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "वः॒॑",
+        from: 0,
+        to: 3,
+        attributes: { varnasLength: 2 },
+      },
+    ],
+  },
+  {
+    input: "नु॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "नु॒॑",
+        from: 0,
+        to: 3,
+        attributes: { varnasLength: 2 },
+      },
+    ],
+  },
+  {
+    input: "ताः॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ताः॒॑",
+        from: 0,
+        to: 4,
+        attributes: { varnasLength: 2 },
       },
     ],
   },
@@ -346,6 +456,58 @@ export const testData: TestDatum[] = [
         from: 12,
         to: 13,
         attributes: { varnasLength: 2 },
+      },
+    ],
+  },
+  {
+    input: "यदायुः॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "य",
+        from: 0,
+        to: 0,
+        attributes: { varnasLength: 2 },
+      },
+      {
+        type: TokenType.Akshara,
+        value: "दा",
+        from: 1,
+        to: 2,
+        attributes: { varnasLength: 2 },
+      },
+      {
+        type: TokenType.Akshara,
+        value: "युः॑",
+        from: 3,
+        to: 6,
+        attributes: { varnasLength: 2 },
+      },
+    ],
+  },
+  {
+    input: "अ॒प्स्व१॒॑न्तः",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "अ॒",
+        from: 0,
+        to: 1,
+        attributes: { varnasLength: 1 },
+      },
+      {
+        type: TokenType.Akshara,
+        value: "प्स्व१॒॑",
+        from: 2,
+        to: 9,
+        attributes: { varnasLength: 4 },
+      },
+      {
+        type: TokenType.Akshara,
+        value: "न्तः",
+        from: 10,
+        to: 13,
+        attributes: { varnasLength: 3 },
       },
     ],
   },

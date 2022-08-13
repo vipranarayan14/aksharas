@@ -315,8 +315,8 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                     break;
                 }
                 if (char.isVowelMarkAttachment()) {
-                    varnasLength += 1;
                     if (nextChar.isAccent()) break;
+                    varnasLength += 1;
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnasLength: varnasLength
                     });

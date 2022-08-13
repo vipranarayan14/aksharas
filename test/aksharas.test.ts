@@ -3,7 +3,7 @@ import { expect, describe, test } from "@jest/globals";
 import Aksharas from "../src";
 import { testData } from "./test-data";
 
-describe("Aksharas#tokenize", () => {
+describe("Aksharas#analyse", () => {
   test.each(testData)(
     "should produce the expected tokens for input: '$input'",
     ({ input, expectedTokens }) => {

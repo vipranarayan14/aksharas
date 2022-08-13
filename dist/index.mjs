@@ -1,3 +1,22 @@
+let $66d137fe0087513e$export$f435f793048e7a0f;
+(function(TokenType) {
+    TokenType["Akshara"] = "akshara";
+    TokenType["Symbol"] = "symbol";
+    TokenType["Whitespace"] = "whitespace";
+    TokenType["Invalid"] = "invalid";
+    TokenType["Unrecognised"] = "unrecognised";
+})($66d137fe0087513e$export$f435f793048e7a0f || ($66d137fe0087513e$export$f435f793048e7a0f = {}));
+class $66d137fe0087513e$export$50792b0e93539fde {
+    constructor(type, value, pos, attributes){
+        this.type = type;
+        this.value = value;
+        this.from = pos;
+        this.to = pos + (value.length - 1);
+        this.attributes = attributes;
+    }
+}
+
+
 const $dbcc9feb5155574f$export$7963e2ffafd9d670 = {
     अ: "vowels",
     आ: "vowels",
@@ -184,43 +203,25 @@ class $21fe2fa54792efd1$export$3ae2e3e9a9c21123 {
 }
 
 
-let $66d137fe0087513e$export$f435f793048e7a0f;
-(function(TokenType) {
-    TokenType["Akshara"] = "akshara";
-    TokenType["Symbol"] = "symbol";
-    TokenType["Whitespace"] = "whitespace";
-    TokenType["Invalid"] = "invalid";
-    TokenType["Unrecognised"] = "unrecognised";
-})($66d137fe0087513e$export$f435f793048e7a0f || ($66d137fe0087513e$export$f435f793048e7a0f = {}));
-class $66d137fe0087513e$export$50792b0e93539fde {
-    constructor(type, value, pos, attributes){
-        this.type = type;
-        this.value = value;
-        this.from = pos;
-        this.to = pos + (value.length - 1);
-        this.attributes = attributes;
-    }
-}
 
-
-let $149c1bd638913645$var$State;
+let $b4bfbd25bd11531b$var$State;
 (function(State) {
     State[State["Initial"] = 0] = "Initial";
     State[State["Vowel"] = 1] = "Vowel";
     State[State["Consonant"] = 2] = "Consonant";
     State[State["ConjunctConsonant"] = 3] = "ConjunctConsonant";
-})($149c1bd638913645$var$State || ($149c1bd638913645$var$State = {}));
-const $149c1bd638913645$var$tokenize = (input)=>{
+})($b4bfbd25bd11531b$var$State || ($b4bfbd25bd11531b$var$State = {}));
+const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
     const tokens = [];
     let pos = 0;
     let acc = "";
     let varnasLength = 0;
-    let state = $149c1bd638913645$var$State.Initial;
+    let state = $b4bfbd25bd11531b$var$State.Initial;
     const resetVariables = ()=>{
         pos = 0;
         acc = "";
         varnasLength = 0;
-        state = $149c1bd638913645$var$State.Initial;
+        state = $b4bfbd25bd11531b$var$State.Initial;
     };
     const createToken = (tokenType, attributes)=>{
         tokens.push(new (0, $66d137fe0087513e$export$50792b0e93539fde)(tokenType, acc, pos, attributes));
@@ -231,7 +232,7 @@ const $149c1bd638913645$var$tokenize = (input)=>{
         const nextChar = new (0, $21fe2fa54792efd1$export$3ae2e3e9a9c21123)(input[i + 1]);
         acc += char.value;
         switch(state){
-            case $149c1bd638913645$var$State.Initial:
+            case $b4bfbd25bd11531b$var$State.Initial:
                 pos = i;
                 if (char.isSymbol()) {
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Symbol);
@@ -247,7 +248,7 @@ const $149c1bd638913645$var$tokenize = (input)=>{
                 }
                 if (char.isVowel()) {
                     if (nextChar.isVowelAttachment()) {
-                        state = $149c1bd638913645$var$State.Vowel;
+                        state = $b4bfbd25bd11531b$var$State.Vowel;
                         break;
                     }
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
@@ -258,7 +259,7 @@ const $149c1bd638913645$var$tokenize = (input)=>{
                 if (char.isConsonant()) {
                     if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
                         varnasLength += 1;
-                        state = $149c1bd638913645$var$State.Consonant;
+                        state = $b4bfbd25bd11531b$var$State.Consonant;
                         break;
                     }
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
@@ -268,7 +269,7 @@ const $149c1bd638913645$var$tokenize = (input)=>{
                 }
                 createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Invalid);
                 break;
-            case $149c1bd638913645$var$State.Vowel:
+            case $b4bfbd25bd11531b$var$State.Vowel:
                 if (char.isAccent()) {
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnasLength: 1
@@ -283,7 +284,7 @@ const $149c1bd638913645$var$tokenize = (input)=>{
                     break;
                 }
                 break;
-            case $149c1bd638913645$var$State.Consonant:
+            case $b4bfbd25bd11531b$var$State.Consonant:
                 if (char.isNukta()) {
                     if (nextChar.isConsonantAttachment()) break;
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
@@ -294,7 +295,7 @@ const $149c1bd638913645$var$tokenize = (input)=>{
                 if (char.isVirama()) {
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $149c1bd638913645$var$State.ConjunctConsonant;
+                        state = $b4bfbd25bd11531b$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
@@ -305,7 +306,7 @@ const $149c1bd638913645$var$tokenize = (input)=>{
                 if (char.isJoiner()) {
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $149c1bd638913645$var$State.ConjunctConsonant;
+                        state = $b4bfbd25bd11531b$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
@@ -329,10 +330,10 @@ const $149c1bd638913645$var$tokenize = (input)=>{
                     });
                     break;
                 }
-            case $149c1bd638913645$var$State.ConjunctConsonant:
+            case $b4bfbd25bd11531b$var$State.ConjunctConsonant:
                 if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
                     varnasLength += 1;
-                    state = $149c1bd638913645$var$State.Consonant;
+                    state = $b4bfbd25bd11531b$var$State.Consonant;
                     break;
                 }
                 varnasLength += 2;
@@ -346,9 +347,36 @@ const $149c1bd638913645$var$tokenize = (input)=>{
     }
     return tokens;
 };
-var $149c1bd638913645$export$2e2bcd8739ae039 = {
-    tokenize: $149c1bd638913645$var$tokenize
+
+
+const $149c1bd638913645$var$calcTotalVarnasLength = (tokens)=>tokens.reduce((total, akshara)=>akshara.attributes ? total + akshara.attributes.varnasLength : total, 0);
+const $149c1bd638913645$var$filterTokens = (tokens, tokenType)=>tokens.filter((token)=>token.type === tokenType);
+const $149c1bd638913645$var$analyse = (input)=>{
+    const tokens = (0, $b4bfbd25bd11531b$export$660b2ee2d4fb4eff)(input);
+    const aksharas = $149c1bd638913645$var$filterTokens(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara);
+    //   const varnas = [];
+    const chars = input.split("");
+    const symbols = $149c1bd638913645$var$filterTokens(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Symbol);
+    const invalidChars = $149c1bd638913645$var$filterTokens(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Invalid);
+    const whitespaces = $149c1bd638913645$var$filterTokens(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Whitespace);
+    const unrecognisedChars = $149c1bd638913645$var$filterTokens(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Unrecognised);
+    const varnasLength = $149c1bd638913645$var$calcTotalVarnasLength(aksharas);
+    return {
+        all: tokens,
+        aksharas: aksharas,
+        // varnas: varnas,
+        chars: chars,
+        symbols: symbols,
+        invalid: invalidChars,
+        whitespaces: whitespaces,
+        unrecognised: unrecognisedChars,
+        varnasLength: varnasLength
+    };
 };
+const $149c1bd638913645$var$Aksharas = {
+    analyse: $149c1bd638913645$var$analyse
+};
+var $149c1bd638913645$export$2e2bcd8739ae039 = $149c1bd638913645$var$Aksharas;
 
 
 export {$149c1bd638913645$export$2e2bcd8739ae039 as default};

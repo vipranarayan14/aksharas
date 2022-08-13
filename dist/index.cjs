@@ -8,6 +8,25 @@ function $parcel$export(e, n, v, s) {
 $parcel$defineInteropFlag(module.exports);
 
 $parcel$export(module.exports, "default", () => $882b6d93070905b3$export$2e2bcd8739ae039);
+let $3aefcdddac337967$export$f435f793048e7a0f;
+(function(TokenType) {
+    TokenType["Akshara"] = "akshara";
+    TokenType["Symbol"] = "symbol";
+    TokenType["Whitespace"] = "whitespace";
+    TokenType["Invalid"] = "invalid";
+    TokenType["Unrecognised"] = "unrecognised";
+})($3aefcdddac337967$export$f435f793048e7a0f || ($3aefcdddac337967$export$f435f793048e7a0f = {}));
+class $3aefcdddac337967$export$50792b0e93539fde {
+    constructor(type, value, pos, attributes){
+        this.type = type;
+        this.value = value;
+        this.from = pos;
+        this.to = pos + (value.length - 1);
+        this.attributes = attributes;
+    }
+}
+
+
 const $25e20db0144ee577$export$7963e2ffafd9d670 = {
     अ: "vowels",
     आ: "vowels",
@@ -194,43 +213,25 @@ class $823e42faaa542640$export$3ae2e3e9a9c21123 {
 }
 
 
-let $3aefcdddac337967$export$f435f793048e7a0f;
-(function(TokenType) {
-    TokenType["Akshara"] = "akshara";
-    TokenType["Symbol"] = "symbol";
-    TokenType["Whitespace"] = "whitespace";
-    TokenType["Invalid"] = "invalid";
-    TokenType["Unrecognised"] = "unrecognised";
-})($3aefcdddac337967$export$f435f793048e7a0f || ($3aefcdddac337967$export$f435f793048e7a0f = {}));
-class $3aefcdddac337967$export$50792b0e93539fde {
-    constructor(type, value, pos, attributes){
-        this.type = type;
-        this.value = value;
-        this.from = pos;
-        this.to = pos + (value.length - 1);
-        this.attributes = attributes;
-    }
-}
 
-
-let $882b6d93070905b3$var$State;
+let $da2f48c805d435e9$var$State;
 (function(State) {
     State[State["Initial"] = 0] = "Initial";
     State[State["Vowel"] = 1] = "Vowel";
     State[State["Consonant"] = 2] = "Consonant";
     State[State["ConjunctConsonant"] = 3] = "ConjunctConsonant";
-})($882b6d93070905b3$var$State || ($882b6d93070905b3$var$State = {}));
-const $882b6d93070905b3$var$tokenize = (input)=>{
+})($da2f48c805d435e9$var$State || ($da2f48c805d435e9$var$State = {}));
+const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
     const tokens = [];
     let pos = 0;
     let acc = "";
     let varnasLength = 0;
-    let state = $882b6d93070905b3$var$State.Initial;
+    let state = $da2f48c805d435e9$var$State.Initial;
     const resetVariables = ()=>{
         pos = 0;
         acc = "";
         varnasLength = 0;
-        state = $882b6d93070905b3$var$State.Initial;
+        state = $da2f48c805d435e9$var$State.Initial;
     };
     const createToken = (tokenType, attributes)=>{
         tokens.push(new (0, $3aefcdddac337967$export$50792b0e93539fde)(tokenType, acc, pos, attributes));
@@ -241,7 +242,7 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
         const nextChar = new (0, $823e42faaa542640$export$3ae2e3e9a9c21123)(input[i + 1]);
         acc += char.value;
         switch(state){
-            case $882b6d93070905b3$var$State.Initial:
+            case $da2f48c805d435e9$var$State.Initial:
                 pos = i;
                 if (char.isSymbol()) {
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Symbol);
@@ -257,7 +258,7 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
                 }
                 if (char.isVowel()) {
                     if (nextChar.isVowelAttachment()) {
-                        state = $882b6d93070905b3$var$State.Vowel;
+                        state = $da2f48c805d435e9$var$State.Vowel;
                         break;
                     }
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
@@ -268,7 +269,7 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
                 if (char.isConsonant()) {
                     if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
                         varnasLength += 1;
-                        state = $882b6d93070905b3$var$State.Consonant;
+                        state = $da2f48c805d435e9$var$State.Consonant;
                         break;
                     }
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
@@ -278,7 +279,7 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
                 }
                 createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Invalid);
                 break;
-            case $882b6d93070905b3$var$State.Vowel:
+            case $da2f48c805d435e9$var$State.Vowel:
                 if (char.isAccent()) {
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnasLength: 1
@@ -293,7 +294,7 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
                     break;
                 }
                 break;
-            case $882b6d93070905b3$var$State.Consonant:
+            case $da2f48c805d435e9$var$State.Consonant:
                 if (char.isNukta()) {
                     if (nextChar.isConsonantAttachment()) break;
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
@@ -304,7 +305,7 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
                 if (char.isVirama()) {
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $882b6d93070905b3$var$State.ConjunctConsonant;
+                        state = $da2f48c805d435e9$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
@@ -315,7 +316,7 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
                 if (char.isJoiner()) {
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $882b6d93070905b3$var$State.ConjunctConsonant;
+                        state = $da2f48c805d435e9$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
@@ -339,10 +340,10 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
                     });
                     break;
                 }
-            case $882b6d93070905b3$var$State.ConjunctConsonant:
+            case $da2f48c805d435e9$var$State.ConjunctConsonant:
                 if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
                     varnasLength += 1;
-                    state = $882b6d93070905b3$var$State.Consonant;
+                    state = $da2f48c805d435e9$var$State.Consonant;
                     break;
                 }
                 varnasLength += 2;
@@ -356,9 +357,36 @@ const $882b6d93070905b3$var$tokenize = (input)=>{
     }
     return tokens;
 };
-var $882b6d93070905b3$export$2e2bcd8739ae039 = {
-    tokenize: $882b6d93070905b3$var$tokenize
+
+
+const $882b6d93070905b3$var$calcTotalVarnasLength = (tokens)=>tokens.reduce((total, akshara)=>akshara.attributes ? total + akshara.attributes.varnasLength : total, 0);
+const $882b6d93070905b3$var$filterTokens = (tokens, tokenType)=>tokens.filter((token)=>token.type === tokenType);
+const $882b6d93070905b3$var$analyse = (input)=>{
+    const tokens = (0, $da2f48c805d435e9$export$660b2ee2d4fb4eff)(input);
+    const aksharas = $882b6d93070905b3$var$filterTokens(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara);
+    //   const varnas = [];
+    const chars = input.split("");
+    const symbols = $882b6d93070905b3$var$filterTokens(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Symbol);
+    const invalidChars = $882b6d93070905b3$var$filterTokens(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Invalid);
+    const whitespaces = $882b6d93070905b3$var$filterTokens(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Whitespace);
+    const unrecognisedChars = $882b6d93070905b3$var$filterTokens(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Unrecognised);
+    const varnasLength = $882b6d93070905b3$var$calcTotalVarnasLength(aksharas);
+    return {
+        all: tokens,
+        aksharas: aksharas,
+        // varnas: varnas,
+        chars: chars,
+        symbols: symbols,
+        invalid: invalidChars,
+        whitespaces: whitespaces,
+        unrecognised: unrecognisedChars,
+        varnasLength: varnasLength
+    };
 };
+const $882b6d93070905b3$var$Aksharas = {
+    analyse: $882b6d93070905b3$var$analyse
+};
+var $882b6d93070905b3$export$2e2bcd8739ae039 = $882b6d93070905b3$var$Aksharas;
 
 
 //# sourceMappingURL=index.cjs.map

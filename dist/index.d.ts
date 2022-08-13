@@ -14,9 +14,19 @@ declare class Token {
     readonly attributes?: TokenAttributes;
     constructor(type: TokenType, value: string, pos: number, attributes?: TokenAttributes);
 }
-declare const _default: {
-    tokenize: (input: string) => Token[];
+type Results = {
+    all: Token[];
+    aksharas: Token[];
+    symbols: Token[];
+    whitespaces: Token[];
+    chars: string[];
+    invalid: Token[];
+    unrecognised: Token[];
+    varnasLength: number;
 };
-export default _default;
+declare const Aksharas: {
+    analyse: (input: string) => Results;
+};
+export default Aksharas;
 
 //# sourceMappingURL=index.d.ts.map

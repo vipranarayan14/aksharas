@@ -136,12 +136,11 @@ export const tokenize = (input: string): Token[] => {
         }
 
         if (char.isVowelMarkAttachment()) {
-          varnasLength += 1;
-
           if (nextChar.isAccent()) {
             break;
           }
 
+          varnasLength += 1;
           createToken(TokenType.Akshara, { varnasLength });
           break;
         }

@@ -1,7 +1,7 @@
 {
   "name": "@vipran/aksharas",
   "version": "0.3.0",
-  "description": "Aksharas is an utility for splitting an Devanagari string into akṣaras and varṇas.",
+  "description": "Aksharas is an utility for analysing akṣaras and varṇas in a Devanagari text.",
   "source": "src/index.ts",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",

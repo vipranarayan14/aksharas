@@ -1,6 +1,6 @@
 {
   "name": "@vipran/aksharas",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Aksharas is an utility for analysing akṣaras and varṇas in a Devanagari text.",
   "source": "src/index.ts",
   "main": "dist/index.cjs",

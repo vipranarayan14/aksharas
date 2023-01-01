@@ -163,6 +163,7 @@ let $21fe2fa54792efd1$var$CharType;
     CharType["Unrecognised"] = "unrecognised";
     CharType["EndOfInput"] = "end_of_input";
 })($21fe2fa54792efd1$var$CharType || ($21fe2fa54792efd1$var$CharType = {}));
+const $21fe2fa54792efd1$var$OM = "ॐ";
 const $21fe2fa54792efd1$var$MATRAS = [
     "१",
     "२",
@@ -183,6 +184,7 @@ class $21fe2fa54792efd1$export$3ae2e3e9a9c21123 {
             $21fe2fa54792efd1$var$CharType.Consonant,
             $21fe2fa54792efd1$var$CharType.ExtraConsonant
         ].includes(this.type);
+    isOm = ()=>this.value === $21fe2fa54792efd1$var$OM;
     isSymbol = ()=>this.type === $21fe2fa54792efd1$var$CharType.Symbol;
     isVowelMark = ()=>this.type === $21fe2fa54792efd1$var$CharType.VowelMark;
     isYogavaha = ()=>this.type === $21fe2fa54792efd1$var$CharType.Yogavaha;
@@ -234,6 +236,12 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
         switch(state){
             case $b4bfbd25bd11531b$var$State.Initial:
                 pos = i;
+                if (char.isOm()) {
+                    createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
+                        varnasLength: 2
+                    });
+                    break;
+                }
                 if (char.isSymbol()) {
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Symbol);
                     break;

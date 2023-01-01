@@ -17,6 +17,7 @@ enum CharType {
   EndOfInput = "end_of_input",
 }
 
+const OM = "ॐ";
 const MATRAS = ["१", "२", "३"];
 
 export class Char {
@@ -40,6 +41,8 @@ export class Char {
 
   isConsonant = () =>
     [CharType.Consonant, CharType.ExtraConsonant].includes(this.type);
+
+  isOm = () => this.value === OM;
 
   isSymbol = () => this.type === CharType.Symbol;
 

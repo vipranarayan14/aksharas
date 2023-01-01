@@ -153,6 +153,18 @@ export const testData: TestData = [
     ],
   },
   {
+    input: "ॐ",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ॐ",
+        from: 0,
+        to: 0,
+        attributes: { varnasLength: 2 },
+      },
+    ],
+  },
+  {
     input: "रामः",
     expectedTokens: [
       {
@@ -303,6 +315,64 @@ export const testData: TestData = [
         from: 6,
         to: 7,
         attributes: { varnasLength: 1 },
+      },
+    ],
+  },
+  {
+    input: "ॐ भूर्भुवः स्वः।",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ॐ",
+        from: 0,
+        to: 0,
+        attributes: { varnasLength: 2 },
+      },
+      {
+        type: TokenType.Whitespace,
+        value: " ",
+        from: 1,
+        to: 1,
+      },
+      {
+        type: TokenType.Akshara,
+        value: "भू",
+        from: 2,
+        to: 3,
+        attributes: { varnasLength: 2 },
+      },
+      {
+        type: TokenType.Akshara,
+        value: "र्भु",
+        from: 4,
+        to: 7,
+        attributes: { varnasLength: 3 },
+      },
+      {
+        type: TokenType.Akshara,
+        value: "वः",
+        from: 8,
+        to: 9,
+        attributes: { varnasLength: 2 },
+      },
+      {
+        type: TokenType.Whitespace,
+        value: " ",
+        from: 10,
+        to: 10,
+      },
+      {
+        type: TokenType.Akshara,
+        value: "स्वः",
+        from: 11,
+        to: 14,
+        attributes: { varnasLength: 3 },
+      },
+      {
+        type: TokenType.Symbol,
+        value: "।",
+        from: 15,
+        to: 15,
       },
     ],
   },

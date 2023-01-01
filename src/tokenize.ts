@@ -39,6 +39,11 @@ export const tokenize = (input: string): Token[] => {
       case State.Initial: {
         pos = i;
 
+        if (char.isOm()) {
+          createToken(TokenType.Akshara, { varnasLength: 2 });
+          break;
+        }
+
         if (char.isSymbol()) {
           createToken(TokenType.Symbol);
           break;

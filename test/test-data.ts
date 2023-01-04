@@ -1,7 +1,9 @@
 import { TokenType, TokenAttributes } from "../src/token";
+import { VarnaType } from "../src/varna";
 
 type TestData = {
   input: string;
+  desc?: string;
   expectedTokens: {
     type: TokenType;
     value: string;
@@ -27,10 +29,17 @@ export const testData: TestData = [
         value: "त",
         from: 1,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "म्॑",
     expectedTokens: [
@@ -39,7 +48,10 @@ export const testData: TestData = [
         value: "म्",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "म्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
       },
       {
         type: TokenType.Invalid,
@@ -49,6 +61,7 @@ export const testData: TestData = [
       },
     ],
   },
+
   {
     input: "काा",
     expectedTokens: [
@@ -57,7 +70,13 @@ export const testData: TestData = [
         value: "का",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "क्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Invalid,
@@ -67,6 +86,7 @@ export const testData: TestData = [
       },
     ],
   },
+
   {
     input: "१॒॑",
     expectedTokens: [
@@ -91,67 +111,7 @@ export const testData: TestData = [
     ],
   },
 
-  // Without any invalid chars
-  {
-    input: "अ॒",
-    expectedTokens: [
-      {
-        type: TokenType.Akshara,
-        value: "अ॒",
-        from: 0,
-        to: 1,
-        attributes: { varnasLength: 1 },
-      },
-    ],
-  },
-  {
-    input: "च॒॑",
-    expectedTokens: [
-      {
-        type: TokenType.Akshara,
-        value: "च॒॑",
-        from: 0,
-        to: 2,
-        attributes: { varnasLength: 2 },
-      },
-    ],
-  },
-  {
-    input: "वः॒॑",
-    expectedTokens: [
-      {
-        type: TokenType.Akshara,
-        value: "वः॒॑",
-        from: 0,
-        to: 3,
-        attributes: { varnasLength: 2 },
-      },
-    ],
-  },
-  {
-    input: "नु॒॑",
-    expectedTokens: [
-      {
-        type: TokenType.Akshara,
-        value: "नु॒॑",
-        from: 0,
-        to: 3,
-        attributes: { varnasLength: 2 },
-      },
-    ],
-  },
-  {
-    input: "ताः॒॑",
-    expectedTokens: [
-      {
-        type: TokenType.Akshara,
-        value: "ताः॒॑",
-        from: 0,
-        to: 4,
-        attributes: { varnasLength: 2 },
-      },
-    ],
-  },
+  // // Without any invalid chars
   {
     input: "ॐ",
     expectedTokens: [
@@ -160,10 +120,182 @@ export const testData: TestData = [
         value: "ॐ",
         from: 0,
         to: 0,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "ओ", type: VarnaType.Svara },
+            { value: "म्", type: VarnaType.Vyanjana },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+  {
+    input: "अ॒",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "अ॒",
+        from: 0,
+        to: 1,
+        attributes: {
+          varnas: [{ value: "अ॒", type: VarnaType.Svara }],
+          varnasLength: 1,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "च॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "च॒॑",
+        from: 0,
+        to: 2,
+        attributes: {
+          varnas: [
+            { value: "च्", type: VarnaType.Vyanjana },
+            { value: "अ॒॑", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "वः॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "वः॒॑",
+        from: 0,
+        to: 3,
+        attributes: {
+          varnas: [
+            { value: "व्", type: VarnaType.Vyanjana },
+            { value: "अः॒॑", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "नु॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "नु॒॑",
+        from: 0,
+        to: 3,
+        attributes: {
+          varnas: [
+            { value: "न्", type: VarnaType.Vyanjana },
+            { value: "उ॒॑", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "ताः॒॑",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ताः॒॑",
+        from: 0,
+        to: 4,
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "आः॒॑", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "ज़्",
+    desc: "extra consonant + virama",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ज़्",
+        from: 0,
+        to: 1,
+        attributes: {
+          varnas: [{ value: "ज़्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "ज़्",
+    desc: "consonant + nukta + virama",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ज़्",
+        from: 0,
+        to: 2,
+        attributes: {
+          varnas: [{ value: "ज़्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "ड़ी",
+    desc: "extra consonant + vowel mark",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ड़ी",
+        from: 0,
+        to: 1,
+        attributes: {
+          varnas: [
+            { value: "ड़्", type: VarnaType.Vyanjana },
+            { value: "ई", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "ऩे",
+    desc: "consonant + nukta + vowel mark",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "ऩे",
+        from: 0,
+        to: 2,
+        attributes: {
+          varnas: [
+            { value: "ऩ्", type: VarnaType.Vyanjana },
+            { value: "ए", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
+      },
+    ],
+  },
+
   {
     input: "रामः",
     expectedTokens: [
@@ -172,17 +304,30 @@ export const testData: TestData = [
         value: "रा",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "र्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "मः",
         from: 2,
         to: 3,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "म्", type: VarnaType.Vyanjana },
+            { value: "अः", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "गुरुः",
     expectedTokens: [
@@ -191,17 +336,30 @@ export const testData: TestData = [
         value: "गु",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "ग्", type: VarnaType.Vyanjana },
+            { value: "उ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "रुः",
         from: 2,
         to: 4,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "र्", type: VarnaType.Vyanjana },
+            { value: "उः", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "सीता",
     expectedTokens: [
@@ -210,17 +368,30 @@ export const testData: TestData = [
         value: "सी",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "स्", type: VarnaType.Vyanjana },
+            { value: "ई", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "ता",
         from: 2,
         to: 3,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "वर्णः",
     expectedTokens: [
@@ -229,17 +400,31 @@ export const testData: TestData = [
         value: "व",
         from: 0,
         to: 0,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "व्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "र्णः",
         from: 1,
         to: 4,
-        attributes: { varnasLength: 3 },
+        attributes: {
+          varnas: [
+            { value: "र्", type: VarnaType.Vyanjana },
+            { value: "ण्", type: VarnaType.Vyanjana },
+            { value: "अः", type: VarnaType.Svara },
+          ],
+          varnasLength: 3,
+        },
       },
     ],
   },
+
   {
     input: "ग्रामम्",
     expectedTokens: [
@@ -248,24 +433,41 @@ export const testData: TestData = [
         value: "ग्रा",
         from: 0,
         to: 3,
-        attributes: { varnasLength: 3 },
+        attributes: {
+          varnas: [
+            { value: "ग्", type: VarnaType.Vyanjana },
+            { value: "र्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 3,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "म",
         from: 4,
         to: 4,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "म्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "म्",
         from: 5,
         to: 6,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "म्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
       },
     ],
   },
+
   {
     input: "रामान्",
     expectedTokens: [
@@ -274,24 +476,40 @@ export const testData: TestData = [
         value: "रा",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "र्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "मा",
         from: 2,
         to: 3,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "म्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "न्",
         from: 4,
         to: 5,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "न्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
       },
     ],
   },
+
   {
     input: "तत्त्वम्",
     expectedTokens: [
@@ -300,24 +518,42 @@ export const testData: TestData = [
         value: "त",
         from: 0,
         to: 0,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "त्त्व",
         from: 1,
         to: 5,
-        attributes: { varnasLength: 4 },
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "व्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 4,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "म्",
         from: 6,
         to: 7,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "म्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
       },
     ],
   },
+
   {
     input: "ॐ भूर्भुवः स्वः।",
     expectedTokens: [
@@ -326,7 +562,13 @@ export const testData: TestData = [
         value: "ॐ",
         from: 0,
         to: 0,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "ओ", type: VarnaType.Svara },
+            { value: "म्", type: VarnaType.Vyanjana },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Whitespace,
@@ -339,21 +581,40 @@ export const testData: TestData = [
         value: "भू",
         from: 2,
         to: 3,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "भ्", type: VarnaType.Vyanjana },
+            { value: "ऊ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "र्भु",
         from: 4,
         to: 7,
-        attributes: { varnasLength: 3 },
+        attributes: {
+          varnas: [
+            { value: "र्", type: VarnaType.Vyanjana },
+            { value: "भ्", type: VarnaType.Vyanjana },
+            { value: "उ", type: VarnaType.Svara },
+          ],
+          varnasLength: 3,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "वः",
         from: 8,
         to: 9,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "व्", type: VarnaType.Vyanjana },
+            { value: "अः", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Whitespace,
@@ -366,7 +627,14 @@ export const testData: TestData = [
         value: "स्वः",
         from: 11,
         to: 14,
-        attributes: { varnasLength: 3 },
+        attributes: {
+          varnas: [
+            { value: "स्", type: VarnaType.Vyanjana },
+            { value: "व्", type: VarnaType.Vyanjana },
+            { value: "अः", type: VarnaType.Svara },
+          ],
+          varnasLength: 3,
+        },
       },
       {
         type: TokenType.Symbol,
@@ -376,6 +644,7 @@ export const testData: TestData = [
       },
     ],
   },
+
   {
     input: "मालान् आनयतु",
     expectedTokens: [
@@ -384,21 +653,36 @@ export const testData: TestData = [
         value: "मा",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "म्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "ला",
         from: 2,
         to: 3,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "ल्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "न्",
         from: 4,
         to: 5,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "न्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
       },
       {
         type: TokenType.Whitespace,
@@ -411,31 +695,53 @@ export const testData: TestData = [
         value: "आ",
         from: 7,
         to: 7,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "आ", type: VarnaType.Svara }],
+          varnasLength: 1,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "न",
         from: 8,
         to: 8,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "न्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "य",
         from: 9,
         to: 9,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "य्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "तु",
         from: 10,
         to: 11,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "उ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "ग्रामादागतः",
     expectedTokens: [
@@ -444,38 +750,70 @@ export const testData: TestData = [
         value: "ग्रा",
         from: 0,
         to: 3,
-        attributes: { varnasLength: 3 },
+        attributes: {
+          varnas: [
+            { value: "ग्", type: VarnaType.Vyanjana },
+            { value: "र्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 3,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "मा",
         from: 4,
         to: 5,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "म्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "दा",
         from: 6,
         to: 7,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "द्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "ग",
         from: 8,
         to: 8,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "ग्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "तः",
         from: 9,
         to: 10,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "अः", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "चिन्तितवान् सः",
     expectedTokens: [
@@ -484,35 +822,63 @@ export const testData: TestData = [
         value: "चि",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "च्", type: VarnaType.Vyanjana },
+            { value: "इ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "न्ति",
         from: 2,
         to: 5,
-        attributes: { varnasLength: 3 },
+        attributes: {
+          varnas: [
+            { value: "न्", type: VarnaType.Vyanjana },
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "इ", type: VarnaType.Svara },
+          ],
+          varnasLength: 3,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "त",
         from: 6,
         to: 6,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "वा",
         from: 7,
         to: 8,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "व्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "न्",
         from: 9,
         to: 10,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "न्", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
       },
       {
         type: TokenType.Whitespace,
@@ -525,10 +891,17 @@ export const testData: TestData = [
         value: "सः",
         from: 12,
         to: 13,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "स्", type: VarnaType.Vyanjana },
+            { value: "अः", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "यदायुः॑",
     expectedTokens: [
@@ -537,24 +910,43 @@ export const testData: TestData = [
         value: "य",
         from: 0,
         to: 0,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "य्", type: VarnaType.Vyanjana },
+            { value: "अ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "दा",
         from: 1,
         to: 2,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "द्", type: VarnaType.Vyanjana },
+            { value: "आ", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "युः॑",
         from: 3,
         to: 6,
-        attributes: { varnasLength: 2 },
+        attributes: {
+          varnas: [
+            { value: "य्", type: VarnaType.Vyanjana },
+            { value: "उः॑", type: VarnaType.Svara },
+          ],
+          varnasLength: 2,
+        },
       },
     ],
   },
+
   {
     input: "अ॒प्स्व१॒॑न्तः",
     expectedTokens: [
@@ -563,21 +955,39 @@ export const testData: TestData = [
         value: "अ॒",
         from: 0,
         to: 1,
-        attributes: { varnasLength: 1 },
+        attributes: {
+          varnas: [{ value: "अ॒", type: VarnaType.Svara }],
+          varnasLength: 1,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "प्स्व१॒॑",
         from: 2,
         to: 9,
-        attributes: { varnasLength: 4 },
+        attributes: {
+          varnas: [
+            { value: "प्", type: VarnaType.Vyanjana },
+            { value: "स्", type: VarnaType.Vyanjana },
+            { value: "व्", type: VarnaType.Vyanjana },
+            { value: "अ१॒॑", type: VarnaType.Svara },
+          ],
+          varnasLength: 4,
+        },
       },
       {
         type: TokenType.Akshara,
         value: "न्तः",
         from: 10,
         to: 13,
-        attributes: { varnasLength: 3 },
+        attributes: {
+          varnas: [
+            { value: "न्", type: VarnaType.Vyanjana },
+            { value: "त्", type: VarnaType.Vyanjana },
+            { value: "अः", type: VarnaType.Svara },
+          ],
+          varnasLength: 3,
+        },
       },
     ],
   },

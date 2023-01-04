@@ -1,5 +1,7 @@
 import { Char } from "./char";
+import { getVowel } from "./utils";
 import { Token, TokenAttributes, TokenType } from "./token";
+import { Varna, VarnaType, VARNAS } from "./varna";
 
 enum State {
   Initial,
@@ -11,15 +13,21 @@ enum State {
 export const tokenize = (input: string): Token[] => {
   const tokens: Token[] = [];
 
-  let pos = 0;
-  let acc = "";
+  let pos: number = 0;
+  let acc: string = "";
   let varnasLength: number = 0;
+  let svaraAcc: string = "";
+  let vyanjanaAcc: string = "";
+  let varnas: Varna[] = [];
   let state = State.Initial;
 
   const resetVariables = () => {
     pos = 0;
     acc = "";
     varnasLength = 0;
+    svaraAcc = "";
+    vyanjanaAcc = "";
+    varnas = [];
     state = State.Initial;
   };
 
@@ -40,7 +48,13 @@ export const tokenize = (input: string): Token[] => {
         pos = i;
 
         if (char.isOm()) {
-          createToken(TokenType.Akshara, { varnasLength: 2 });
+          createToken(TokenType.Akshara, {
+            varnas: [
+              new Varna(VarnaType.Svara, VARNAS.Om[0]),
+              new Varna(VarnaType.Vyanjana, VARNAS.Om[1]),
+            ],
+            varnasLength: 2,
+          });
           break;
         }
 
@@ -65,18 +79,29 @@ export const tokenize = (input: string): Token[] => {
             break;
           }
 
-          createToken(TokenType.Akshara, { varnasLength: 1 });
+          createToken(TokenType.Akshara, {
+            varnas: [new Varna(VarnaType.Svara, acc)],
+            varnasLength: 1,
+          });
           break;
         }
 
         if (char.isConsonant()) {
+          vyanjanaAcc += char.value;
+
           if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
             varnasLength += 1;
             state = State.Consonant;
             break;
           }
 
-          createToken(TokenType.Akshara, { varnasLength: 2 });
+          createToken(TokenType.Akshara, {
+            varnas: [
+              new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
+              new Varna(VarnaType.Svara, VARNAS.InherentA),
+            ],
+            varnasLength: 2,
+          });
           break;
         }
 
@@ -86,7 +111,10 @@ export const tokenize = (input: string): Token[] => {
 
       case State.Vowel: {
         if (char.isAccent()) {
-          createToken(TokenType.Akshara, { varnasLength: 1 });
+          createToken(TokenType.Akshara, {
+            varnas: [new Varna(VarnaType.Svara, acc)],
+            varnasLength: 1,
+          });
           break;
         }
 
@@ -95,7 +123,10 @@ export const tokenize = (input: string): Token[] => {
             break;
           }
 
-          createToken(TokenType.Akshara, { varnasLength: 1 });
+          createToken(TokenType.Akshara, {
+            varnas: [new Varna(VarnaType.Svara, acc)],
+            varnasLength: 1,
+          });
           break;
         }
 
@@ -104,11 +135,19 @@ export const tokenize = (input: string): Token[] => {
 
       case State.Consonant: {
         if (char.isNukta()) {
+          vyanjanaAcc += char.value;
+
           if (nextChar.isConsonantAttachment()) {
             break;
           }
 
-          createToken(TokenType.Akshara, { varnasLength: 2 });
+          createToken(TokenType.Akshara, {
+            varnas: [
+              new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
+              new Varna(VarnaType.Svara, VARNAS.InherentA),
+            ],
+            varnasLength: 2,
+          });
           break;
         }
 
@@ -119,10 +158,18 @@ export const tokenize = (input: string): Token[] => {
 
           if (nextChar.isConsonant()) {
             state = State.ConjunctConsonant;
+
+            varnas = varnas.concat([
+              new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
+            ]);
+
             break;
           }
 
-          createToken(TokenType.Akshara, { varnasLength });
+          createToken(TokenType.Akshara, {
+            varnas: [new Varna(VarnaType.Vyanjana, acc)],
+            varnasLength,
+          });
           break;
         }
 
@@ -136,32 +183,54 @@ export const tokenize = (input: string): Token[] => {
             break;
           }
 
-          createToken(TokenType.Akshara, { varnasLength });
+          createToken(TokenType.Akshara, {
+            varnas: [new Varna(VarnaType.Vyanjana, acc + VARNAS.Virama)],
+            varnasLength,
+          });
           break;
         }
 
         if (char.isVowelMarkAttachment()) {
+          svaraAcc = (svaraAcc || VARNAS.InherentA) + char.value;
+
           if (nextChar.isAccent()) {
             break;
           }
 
           varnasLength += 1;
-          createToken(TokenType.Akshara, { varnasLength });
+
+          createToken(TokenType.Akshara, {
+            varnas: varnas.concat([
+              new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
+              new Varna(VarnaType.Svara, svaraAcc),
+            ]),
+            varnasLength,
+          });
           break;
         }
 
         if (char.isVowelMark()) {
+          svaraAcc = getVowel(char.value);
+
           if (nextChar.isVowelMarkAttachment()) {
             break;
           }
 
           varnasLength += 1;
-          createToken(TokenType.Akshara, { varnasLength });
+          createToken(TokenType.Akshara, {
+            varnas: varnas.concat([
+              new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
+              new Varna(VarnaType.Svara, svaraAcc),
+            ]),
+            varnasLength,
+          });
           break;
         }
       }
 
       case State.ConjunctConsonant: {
+        vyanjanaAcc = char.value;
+
         if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
           varnasLength += 1;
           state = State.Consonant;
@@ -169,7 +238,13 @@ export const tokenize = (input: string): Token[] => {
         }
 
         varnasLength += 2;
-        createToken(TokenType.Akshara, { varnasLength });
+        createToken(TokenType.Akshara, {
+          varnas: varnas.concat([
+            new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
+            new Varna(VarnaType.Svara, VARNAS.InherentA),
+          ]),
+          varnasLength,
+        });
         break;
       }
 

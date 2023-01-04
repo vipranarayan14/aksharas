@@ -25,10 +25,15 @@
     "url": "git+https://github.com/vipranarayan14/aksharas.git"
   },
   "keywords": [
+    "character-counter",
+    "characters",
     "devanagari",
-    "sanskrit",
     "indic-scripts",
-    "indic-languages"
+    "indic-languages",
+    "sanskrit",
+    "sanskrit-language",
+    "syllabification",
+    "syllables"
   ],
   "bugs": {
     "url": "https://github.com/vipranarayan14/aksharas/issues"

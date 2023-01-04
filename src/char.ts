@@ -26,10 +26,10 @@ export class Char {
 
   constructor(value: string) {
     this.value = value;
-    this.type = this.getCharType(value);
+    this.type = this.#getCharType(value);
   }
 
-  getCharType = (char: string): CharType => {
+  #getCharType = (char: string): CharType => {
     if (char === undefined) return CharType.EndOfInput;
 
     if (/\s/.test(char)) return CharType.Whitespace;

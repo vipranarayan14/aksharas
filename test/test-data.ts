@@ -34,7 +34,6 @@ export const invalidChars: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -51,7 +50,6 @@ export const invalidChars: TestData[] = [
         to: 1,
         attributes: {
           varnas: [{ value: "म्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
       {
@@ -77,7 +75,6 @@ export const invalidChars: TestData[] = [
             { value: "क्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -130,7 +127,6 @@ export const validChars: TestData[] = [
             { value: "ओ", type: VarnaType.Svara },
             { value: "म्", type: VarnaType.Vyanjana },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -147,7 +143,6 @@ export const validChars: TestData[] = [
         to: 1,
         attributes: {
           varnas: [{ value: "अ॒", type: VarnaType.Svara }],
-          varnasLength: 1,
         },
       },
     ],
@@ -164,7 +159,6 @@ export const validChars: TestData[] = [
         to: 2,
         attributes: {
           varnas: [{ value: "क्‍", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
     ],
@@ -184,7 +178,6 @@ export const validChars: TestData[] = [
             { value: "क्‌", type: VarnaType.Vyanjana },
             { value: "ष्", type: VarnaType.Vyanjana },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -204,7 +197,6 @@ export const validChars: TestData[] = [
             { value: "च्", type: VarnaType.Vyanjana },
             { value: "अ॒॑", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -224,7 +216,6 @@ export const validChars: TestData[] = [
             { value: "व्", type: VarnaType.Vyanjana },
             { value: "अः॒॑", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -244,7 +235,6 @@ export const validChars: TestData[] = [
             { value: "न्", type: VarnaType.Vyanjana },
             { value: "उ॒॑", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -264,7 +254,6 @@ export const validChars: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "आः॒॑", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -281,7 +270,6 @@ export const validChars: TestData[] = [
         to: 1,
         attributes: {
           varnas: [{ value: "ज़्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
     ],
@@ -298,7 +286,6 @@ export const validChars: TestData[] = [
         to: 2,
         attributes: {
           varnas: [{ value: "ज़्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
     ],
@@ -318,7 +305,6 @@ export const validChars: TestData[] = [
             { value: "ड़्", type: VarnaType.Vyanjana },
             { value: "ई", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -338,7 +324,6 @@ export const validChars: TestData[] = [
             { value: "ऩ्", type: VarnaType.Vyanjana },
             { value: "ए", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -360,7 +345,6 @@ export const simpleWords: TestData[] = [
             { value: "र्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -373,7 +357,6 @@ export const simpleWords: TestData[] = [
             { value: "म्", type: VarnaType.Vyanjana },
             { value: "अः", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -393,7 +376,6 @@ export const simpleWords: TestData[] = [
             { value: "ग्", type: VarnaType.Vyanjana },
             { value: "उ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -406,7 +388,6 @@ export const simpleWords: TestData[] = [
             { value: "र्", type: VarnaType.Vyanjana },
             { value: "उः", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -426,7 +407,6 @@ export const simpleWords: TestData[] = [
             { value: "स्", type: VarnaType.Vyanjana },
             { value: "ई", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -439,7 +419,6 @@ export const simpleWords: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -459,7 +438,6 @@ export const simpleWords: TestData[] = [
             { value: "र्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -472,7 +450,6 @@ export const simpleWords: TestData[] = [
             { value: "म्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -482,7 +459,6 @@ export const simpleWords: TestData[] = [
         to: 5,
         attributes: {
           varnas: [{ value: "न्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
     ],
@@ -504,7 +480,6 @@ export const complexWords: TestData[] = [
             { value: "व्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -518,7 +493,6 @@ export const complexWords: TestData[] = [
             { value: "ण्", type: VarnaType.Vyanjana },
             { value: "अः", type: VarnaType.Svara },
           ],
-          varnasLength: 3,
         },
       },
     ],
@@ -539,7 +513,6 @@ export const complexWords: TestData[] = [
             { value: "र्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 3,
         },
       },
       {
@@ -552,7 +525,6 @@ export const complexWords: TestData[] = [
             { value: "म्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -562,7 +534,6 @@ export const complexWords: TestData[] = [
         to: 6,
         attributes: {
           varnas: [{ value: "म्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
     ],
@@ -582,7 +553,6 @@ export const complexWords: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -597,7 +567,6 @@ export const complexWords: TestData[] = [
             { value: "व्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 4,
         },
       },
       {
@@ -607,7 +576,6 @@ export const complexWords: TestData[] = [
         to: 7,
         attributes: {
           varnas: [{ value: "म्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
     ],
@@ -629,7 +597,6 @@ export const simpleStrings: TestData[] = [
             { value: "म्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -642,7 +609,6 @@ export const simpleStrings: TestData[] = [
             { value: "ल्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -652,7 +618,6 @@ export const simpleStrings: TestData[] = [
         to: 5,
         attributes: {
           varnas: [{ value: "न्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
       {
@@ -668,7 +633,6 @@ export const simpleStrings: TestData[] = [
         to: 7,
         attributes: {
           varnas: [{ value: "आ", type: VarnaType.Svara }],
-          varnasLength: 1,
         },
       },
       {
@@ -681,7 +645,6 @@ export const simpleStrings: TestData[] = [
             { value: "न्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -694,7 +657,6 @@ export const simpleStrings: TestData[] = [
             { value: "य्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -707,7 +669,6 @@ export const simpleStrings: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "उ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -728,7 +689,6 @@ export const simpleStrings: TestData[] = [
             { value: "र्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 3,
         },
       },
       {
@@ -741,7 +701,6 @@ export const simpleStrings: TestData[] = [
             { value: "म्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -754,7 +713,6 @@ export const simpleStrings: TestData[] = [
             { value: "द्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -767,7 +725,6 @@ export const simpleStrings: TestData[] = [
             { value: "ग्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -780,7 +737,6 @@ export const simpleStrings: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "अः", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -800,7 +756,6 @@ export const simpleStrings: TestData[] = [
             { value: "च्", type: VarnaType.Vyanjana },
             { value: "इ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -814,7 +769,6 @@ export const simpleStrings: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "इ", type: VarnaType.Svara },
           ],
-          varnasLength: 3,
         },
       },
       {
@@ -827,7 +781,6 @@ export const simpleStrings: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -840,7 +793,6 @@ export const simpleStrings: TestData[] = [
             { value: "व्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -850,7 +802,6 @@ export const simpleStrings: TestData[] = [
         to: 10,
         attributes: {
           varnas: [{ value: "न्", type: VarnaType.Vyanjana }],
-          varnasLength: 1,
         },
       },
       {
@@ -869,7 +820,6 @@ export const simpleStrings: TestData[] = [
             { value: "स्", type: VarnaType.Vyanjana },
             { value: "अः", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -891,7 +841,6 @@ export const complexStrings: TestData[] = [
             { value: "ओ", type: VarnaType.Svara },
             { value: "म्", type: VarnaType.Vyanjana },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -910,7 +859,6 @@ export const complexStrings: TestData[] = [
             { value: "भ्", type: VarnaType.Vyanjana },
             { value: "ऊ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -924,7 +872,6 @@ export const complexStrings: TestData[] = [
             { value: "भ्", type: VarnaType.Vyanjana },
             { value: "उ", type: VarnaType.Svara },
           ],
-          varnasLength: 3,
         },
       },
       {
@@ -937,7 +884,6 @@ export const complexStrings: TestData[] = [
             { value: "व्", type: VarnaType.Vyanjana },
             { value: "अः", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -957,7 +903,6 @@ export const complexStrings: TestData[] = [
             { value: "व्", type: VarnaType.Vyanjana },
             { value: "अः", type: VarnaType.Svara },
           ],
-          varnasLength: 3,
         },
       },
       {
@@ -983,7 +928,6 @@ export const complexStrings: TestData[] = [
             { value: "य्", type: VarnaType.Vyanjana },
             { value: "अ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -996,7 +940,6 @@ export const complexStrings: TestData[] = [
             { value: "द्", type: VarnaType.Vyanjana },
             { value: "आ", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
       {
@@ -1009,7 +952,6 @@ export const complexStrings: TestData[] = [
             { value: "य्", type: VarnaType.Vyanjana },
             { value: "उः॑", type: VarnaType.Svara },
           ],
-          varnasLength: 2,
         },
       },
     ],
@@ -1026,7 +968,6 @@ export const complexStrings: TestData[] = [
         to: 1,
         attributes: {
           varnas: [{ value: "अ॒", type: VarnaType.Svara }],
-          varnasLength: 1,
         },
       },
       {
@@ -1041,7 +982,6 @@ export const complexStrings: TestData[] = [
             { value: "व्", type: VarnaType.Vyanjana },
             { value: "अ१॒॑", type: VarnaType.Svara },
           ],
-          varnasLength: 4,
         },
       },
       {
@@ -1055,7 +995,6 @@ export const complexStrings: TestData[] = [
             { value: "त्", type: VarnaType.Vyanjana },
             { value: "अः", type: VarnaType.Svara },
           ],
-          varnasLength: 3,
         },
       },
     ],

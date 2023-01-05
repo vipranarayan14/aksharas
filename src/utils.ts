@@ -1,13 +1,6 @@
 import { Token, TokenType } from "./token";
 import { Varna } from "./varna";
 
-export const calcTotalVarnasLength = (tokens: Token[]) =>
-  tokens.reduce(
-    (total, akshara) =>
-      akshara.attributes ? total + akshara.attributes.varnasLength : total,
-    0
-  );
-
 export const extractVarnas = (aksharas: Token[]): Varna[] =>
   aksharas.flatMap((akshara) => akshara.attributes?.varnas);
 

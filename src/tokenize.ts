@@ -15,7 +15,6 @@ export const tokenize = (input: string): Token[] => {
 
   let pos: number = 0;
   let acc: string = "";
-  let varnasLength: number = 0;
   let svaraAcc: string = "";
   let vyanjanaAcc: string = "";
   let varnas: Varna[] = [];
@@ -24,7 +23,6 @@ export const tokenize = (input: string): Token[] => {
   const resetVariables = () => {
     pos = 0;
     acc = "";
-    varnasLength = 0;
     svaraAcc = "";
     vyanjanaAcc = "";
     varnas = [];
@@ -53,7 +51,6 @@ export const tokenize = (input: string): Token[] => {
               new Varna(VarnaType.Svara, VARNAS.Om[0]),
               new Varna(VarnaType.Vyanjana, VARNAS.Om[1]),
             ]),
-            varnasLength: 2,
           });
           break;
         }
@@ -81,7 +78,6 @@ export const tokenize = (input: string): Token[] => {
 
           createToken(TokenType.Akshara, {
             varnas: varnas.concat([new Varna(VarnaType.Svara, acc)]),
-            varnasLength: 1,
           });
           break;
         }
@@ -90,7 +86,6 @@ export const tokenize = (input: string): Token[] => {
           vyanjanaAcc += char.value;
 
           if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
-            varnasLength += 1;
             state = State.Consonant;
             break;
           }
@@ -100,7 +95,6 @@ export const tokenize = (input: string): Token[] => {
               new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
               new Varna(VarnaType.Svara, VARNAS.InherentA),
             ]),
-            varnasLength: 2,
           });
           break;
         }
@@ -113,7 +107,6 @@ export const tokenize = (input: string): Token[] => {
         if (char.isAccent()) {
           createToken(TokenType.Akshara, {
             varnas: varnas.concat([new Varna(VarnaType.Svara, acc)]),
-            varnasLength: 1,
           });
           break;
         }
@@ -125,7 +118,6 @@ export const tokenize = (input: string): Token[] => {
 
           createToken(TokenType.Akshara, {
             varnas: varnas.concat([new Varna(VarnaType.Svara, acc)]),
-            varnasLength: 1,
           });
           break;
         }
@@ -146,7 +138,6 @@ export const tokenize = (input: string): Token[] => {
               new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
               new Varna(VarnaType.Svara, VARNAS.InherentA),
             ]),
-            varnasLength: 2,
           });
           break;
         }
@@ -159,18 +150,16 @@ export const tokenize = (input: string): Token[] => {
           }
 
           if (nextChar.isConsonant()) {
-            state = State.ConjunctConsonant;
-
             varnas = varnas.concat([
               new Varna(VarnaType.Vyanjana, vyanjanaAcc),
             ]);
 
+            state = State.ConjunctConsonant;
             break;
           }
 
           createToken(TokenType.Akshara, {
             varnas: varnas.concat([new Varna(VarnaType.Vyanjana, vyanjanaAcc)]),
-            varnasLength,
           });
           break;
         }
@@ -183,18 +172,16 @@ export const tokenize = (input: string): Token[] => {
           }
 
           if (nextChar.isConsonant()) {
-            state = State.ConjunctConsonant;
-
             varnas = varnas.concat([
               new Varna(VarnaType.Vyanjana, vyanjanaAcc),
             ]);
 
+            state = State.ConjunctConsonant;
             break;
           }
 
           createToken(TokenType.Akshara, {
             varnas: varnas.concat([new Varna(VarnaType.Vyanjana, vyanjanaAcc)]),
-            varnasLength,
           });
           break;
         }
@@ -206,14 +193,11 @@ export const tokenize = (input: string): Token[] => {
             break;
           }
 
-          varnasLength += 1;
-
           createToken(TokenType.Akshara, {
             varnas: varnas.concat([
               new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
               new Varna(VarnaType.Svara, svaraAcc),
             ]),
-            varnasLength,
           });
           break;
         }
@@ -225,13 +209,11 @@ export const tokenize = (input: string): Token[] => {
             break;
           }
 
-          varnasLength += 1;
           createToken(TokenType.Akshara, {
             varnas: varnas.concat([
               new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
               new Varna(VarnaType.Svara, svaraAcc),
             ]),
-            varnasLength,
           });
           break;
         }
@@ -241,18 +223,15 @@ export const tokenize = (input: string): Token[] => {
         vyanjanaAcc = char.value;
 
         if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
-          varnasLength += 1;
           state = State.Consonant;
           break;
         }
 
-        varnasLength += 2;
         createToken(TokenType.Akshara, {
           varnas: varnas.concat([
             new Varna(VarnaType.Vyanjana, vyanjanaAcc + VARNAS.Virama),
             new Varna(VarnaType.Svara, VARNAS.InherentA),
           ]),
-          varnasLength,
         });
         break;
       }

@@ -17,7 +17,6 @@ const all = [
         { value: "ओ", type: VarnaType.Svara },
         { value: "म्", type: VarnaType.Vyanjana },
       ],
-      varnasLength: 2,
     },
   },
   {
@@ -36,7 +35,6 @@ const all = [
         { value: "भ्", type: VarnaType.Vyanjana },
         { value: "ऊ", type: VarnaType.Svara },
       ],
-      varnasLength: 2,
     },
   },
   {
@@ -50,7 +48,6 @@ const all = [
         { value: "भ्", type: VarnaType.Vyanjana },
         { value: "उ", type: VarnaType.Svara },
       ],
-      varnasLength: 3,
     },
   },
   {
@@ -63,7 +60,6 @@ const all = [
         { value: "व्", type: VarnaType.Vyanjana },
         { value: "अः", type: VarnaType.Svara },
       ],
-      varnasLength: 2,
     },
   },
   {
@@ -83,7 +79,6 @@ const all = [
         { value: "व्", type: VarnaType.Vyanjana },
         { value: "अः", type: VarnaType.Svara },
       ],
-      varnasLength: 3,
     },
   },
   {
@@ -105,7 +100,6 @@ const aksharas = [
         { value: "ओ", type: VarnaType.Svara },
         { value: "म्", type: VarnaType.Vyanjana },
       ],
-      varnasLength: 2,
     },
   },
   {
@@ -118,7 +112,6 @@ const aksharas = [
         { value: "भ्", type: VarnaType.Vyanjana },
         { value: "ऊ", type: VarnaType.Svara },
       ],
-      varnasLength: 2,
     },
   },
   {
@@ -132,7 +125,6 @@ const aksharas = [
         { value: "भ्", type: VarnaType.Vyanjana },
         { value: "उ", type: VarnaType.Svara },
       ],
-      varnasLength: 3,
     },
   },
   {
@@ -145,7 +137,6 @@ const aksharas = [
         { value: "व्", type: VarnaType.Vyanjana },
         { value: "अः", type: VarnaType.Svara },
       ],
-      varnasLength: 2,
     },
   },
   {
@@ -159,7 +150,6 @@ const aksharas = [
         { value: "व्", type: VarnaType.Vyanjana },
         { value: "अः", type: VarnaType.Svara },
       ],
-      varnasLength: 3,
     },
   },
 ];
@@ -230,8 +220,6 @@ const whitespaces = [
 
 const unrecognised = [];
 
-const varnasLength = 12;
-
 describe("Aksharas#analyse", () => {
   const results = Aksharas.analyse(input);
 
@@ -265,9 +253,5 @@ describe("Aksharas#analyse", () => {
 
   test("Results#unrecognised", () => {
     expect(results.unrecognised).toEqual(unrecognised);
-  });
-
-  test("Results#varnasLength", () => {
-    expect(results.varnasLength).toEqual(varnasLength);
   });
 });

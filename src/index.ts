@@ -14,7 +14,6 @@ type Results = {
   chars: string[];
   invalid: Token[];
   unrecognised: Token[];
-  varnasLength: number /* Will be deprecated */;
 };
 
 const analyse = (input: string): Results => {
@@ -34,8 +33,6 @@ const analyse = (input: string): Results => {
 
   const unrecognisedChars = utils.filterTokens(tokens, TokenType.Unrecognised);
 
-  const varnasLength = utils.calcTotalVarnasLength(aksharas);
-
   return {
     all: tokens,
     aksharas: aksharas,
@@ -45,7 +42,6 @@ const analyse = (input: string): Results => {
     invalid: invalidChars,
     whitespaces: whitespaces,
     unrecognised: unrecognisedChars,
-    varnasLength: varnasLength,
   };
 };
 

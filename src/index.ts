@@ -1,10 +1,14 @@
-import { Token, TokenType } from "./token";
+import * as utils from "./utils";
+
 import { tokenize } from "./tokenize";
+
+import { Token, TokenType } from "./token";
+import { Varna } from "./varna";
 
 type Results = {
   all: Token[];
   aksharas: Token[];
-  //   varnas: Token[] /* Yet to be implemented */;
+  varnas: Varna[];
   symbols: Token[];
   whitespaces: Token[];
   chars: string[];
@@ -13,39 +17,29 @@ type Results = {
   varnasLength: number /* Will be deprecated */;
 };
 
-const calcTotalVarnasLength = (tokens: Token[]) =>
-  tokens.reduce(
-    (total, akshara) =>
-      akshara.attributes ? total + akshara.attributes.varnasLength : total,
-    0
-  );
-
-const filterTokens = (tokens: Token[], tokenType: TokenType) =>
-  tokens.filter((token) => token.type === tokenType);
-
 const analyse = (input: string): Results => {
   const tokens = tokenize(input);
 
-  const aksharas = filterTokens(tokens, TokenType.Akshara);
+  const aksharas = utils.filterTokens(tokens, TokenType.Akshara);
 
-  //   const varnas = [];
+  const varnas = utils.extractVarnas(aksharas);
 
   const chars = input.split("");
 
-  const symbols = filterTokens(tokens, TokenType.Symbol);
+  const symbols = utils.filterTokens(tokens, TokenType.Symbol);
 
-  const invalidChars = filterTokens(tokens, TokenType.Invalid);
+  const invalidChars = utils.filterTokens(tokens, TokenType.Invalid);
 
-  const whitespaces = filterTokens(tokens, TokenType.Whitespace);
+  const whitespaces = utils.filterTokens(tokens, TokenType.Whitespace);
 
-  const unrecognisedChars = filterTokens(tokens, TokenType.Unrecognised);
+  const unrecognisedChars = utils.filterTokens(tokens, TokenType.Unrecognised);
 
-  const varnasLength = calcTotalVarnasLength(aksharas);
+  const varnasLength = utils.calcTotalVarnasLength(aksharas);
 
   return {
     all: tokens,
     aksharas: aksharas,
-    // varnas: varnas,
+    varnas: varnas,
     chars: chars,
     symbols: symbols,
     invalid: invalidChars,

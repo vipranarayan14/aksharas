@@ -147,6 +147,43 @@ export const testData: TestData = [
   },
 
   {
+    input: "क्‍",
+    desc: "consonant + virama + zwj",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "क्‍",
+        from: 0,
+        to: 2,
+        attributes: {
+          varnas: [{ value: "क्‍", type: VarnaType.Vyanjana }],
+          varnasLength: 1,
+        },
+      },
+    ],
+  },
+
+  {
+    input: "क्‌ष्",
+    desc: "consonant + virama + zwj + consonant + virama",
+    expectedTokens: [
+      {
+        type: TokenType.Akshara,
+        value: "क्‌ष्",
+        from: 0,
+        to: 4,
+        attributes: {
+          varnas: [
+            { value: "क्‌", type: VarnaType.Vyanjana },
+            { value: "ष्", type: VarnaType.Vyanjana },
+          ],
+          varnasLength: 2,
+        },
+      },
+    ],
+  },
+
+  {
     input: "च॒॑",
     expectedTokens: [
       {

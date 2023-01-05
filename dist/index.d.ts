@@ -14,9 +14,19 @@ declare class Token {
     readonly attributes?: TokenAttributes;
     constructor(type: TokenType, value: string, pos: number, attributes?: TokenAttributes);
 }
+enum VarnaType {
+    Svara = "svara",
+    Vyanjana = "vyanjana"
+}
+declare class Varna {
+    readonly type: VarnaType;
+    readonly value: string;
+    constructor(type: VarnaType, value: string);
+}
 type Results = {
     all: Token[];
     aksharas: Token[];
+    varnas: Varna[];
     symbols: Token[];
     whitespaces: Token[];
     chars: string[];

@@ -47,6 +47,8 @@ const analyse = (input: string): Results => {
 
 const Aksharas = {
   analyse,
+  TokenType,
+  VarnaType,
 };
 
 export default Aksharas;

@@ -1,7 +1,6 @@
 import { expect, describe, test } from "@jest/globals";
 
-import Aksharas from "../src";
-import { TokenType } from "../src/token";
+import Aksharas, { TokenType } from "../src";
 import * as testData from "./test-data";
 
 const testFn = ({ input, expectedTokens }: testData.TestData) => {

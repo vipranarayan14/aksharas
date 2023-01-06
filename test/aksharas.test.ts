@@ -1,8 +1,8 @@
 import { expect, describe, test } from "@jest/globals";
 
-import Aksharas from "../src";
-import { TokenType } from "../src/token";
-import { VarnaType } from "../src/varna";
+import Aksharas, { TokenType, VarnaType } from "../src";
+
+
 
 const input = "ॐ भूर्भुवः स्वः।";
 

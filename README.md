@@ -142,7 +142,7 @@ Many of the properties in the `Results` object consists of an array of `Token`-s
 
 - **type**
     - type: `VarnaType`
-    - Type of the token. One of the values of [`Aksharas.VarnaType`](#aksharastokentype).
+    - Type of the token. One of the values of [`Aksharas.VarnaType`](#aksharasvarnatype).
 - **value**
     - type: `string`
     - Conatins an analysed part of the `input` string.

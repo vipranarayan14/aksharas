@@ -4,6 +4,7 @@
 
 **Aksharas** is an utility for analysing *akṣaras* and *varṇas* in a Devanagari text.
 
+
 ## Installation
 
 ```sh
@@ -16,7 +17,7 @@ npm i @vipran/aksharas
 import Aksharas from "@vipran/aksharas";
 
 // OR for CommonJS:
-// const Aksharas = require("@vipran/aksharas");
+// const Aksharas = require("@vipran/aksharas").default;
 
 const input = "सर्वे भवन्तु सुखिनः।"
 
@@ -24,20 +25,19 @@ const results = Aksharas.analyse(input);
 
 const aksharas = results.aksharas.map(akshara => akshara.value);
 
-console.log(aksharas); 
-// स, र्वे, भ, व, न्तु, सु, खि, नः
-
+console.log(aksharas); // "स", "र्वे", "भ", "व", "न्तु", "सु", "खि", "नः"
 ```
 
 ## API
 
 ### `Aksharas.analyse()`
 
-```ts
-const results: Results = Aksharas.analyse(input: string);
-```
-
 Accepts a `string` input and returns a [`Results`](#results) object.
+
+```ts
+const input: string = 'नमः';
+const results: Results = Aksharas.analyse(input);
+```
 
 ### `Aksharas.TokenType`
 
@@ -49,7 +49,43 @@ It is an enum with the following values:
 - `TokenType.Invalid`
 - `TokenType.Unrecognised`
 
-These can be used to filter the tokens in the [`Results`](#results) object.
+These can be used to filter the tokens in the [`Results`](#results) object. Example:
+
+```js
+import Aksharas from "@vipran/aksharas";
+// OR import Aksharas, { TokenType } ...
+
+const input = "हे! हरेऽत्र नागच्छ।";
+const results = Aksharas.analyse(input);
+const symbols = results.all
+  .filter((token) => token.type === Aksharas.TokenType.Symbol)
+  .map((token) => token.value);
+
+console.log(symbols); // "ऽ", "।"
+```
+
+### `Aksharas.VarnaType`
+
+It is an enum with the following values:
+
+- `VarnaType.Svara`
+- `VarnaType.Vyanjana`
+
+These can be used to filter the varnas in [`Results.varnas`](#results). Example:
+
+```js
+import Aksharas from "@vipran/aksharas";
+// OR import Aksharas, { VarnaType } ...
+
+const input = "गुरुः";
+const results = Aksharas.analyse(input);
+
+const svaras = results.varnas
+  .filter((varna) => varna.type === Aksharas.VarnaType.Svara)
+  .map((varna) => varna.value);
+
+console.log(svaras); // "उ", "उः"
+```
 
 ### `Results`
 
@@ -61,6 +97,9 @@ The `Results` object contains the following properties:
 - **aksharas** 
     - type: `Token[]`
     - Devanagari syllables like रा, सी, etc. Here, *halanta* consonants such as क्, च्, य्, etc. are also considered as `aksharas` when they are at the end of a word.
+- **varnas** 
+    - type: `Varna[]`
+    - Devanagari consonants and vowels in the `input`. *(Only in v0.4.0 or above.)*
 - **symbols** 
     - type: `Token[]`
     - Devanagari symbols such as १, २, ।, ॥, etc. 
@@ -76,13 +115,10 @@ The `Results` object contains the following properties:
 - **chars** 
     - type: `string[]`
     - All Unicode characters in the `input` string. Same as `String.prototype.split()`.
-- **varnasLength** 
-    - type: `number`
-    - The total number of consonants and vowels in the `input`. *Note: This property maybe deprecated in the future.*
 
 ### `Token`
 
-Many of the properties in the `Results` object consists of a array of `Token`-s. A `Token` object has the following properties:
+Many of the properties in the `Results` object consists of an array of `Token`-s. A `Token` object has the following properties:
 
 - **type**
     - type: `TokenType`
@@ -98,7 +134,19 @@ Many of the properties in the `Results` object consists of a array of `Token`-s.
     - To index - representing the end position of the token in the `input` string.
 - **attributes**
     - type: `Record<string, any>`
-    - An optional key-value object which may contain other attributes of the token. It is currently used only in the `Akshara` tokens for storing the number of varnas in that akshara.
+    - An optional key-value object which may contain other attributes of the token. It is currently used only in the `Akshara` tokens for storing the `varnas` in that akshara.
+
+### `Varna`
+
+`Results.varnas` consists of an array of `Varna` objects. A `Varna` object has the following properties:
+
+- **type**
+    - type: `VarnaType`
+    - Type of the token. One of the values of [`Aksharas.VarnaType`](#aksharastokentype).
+- **value**
+    - type: `string`
+    - Conatins an analysed part of the `input` string.
+
 
 ## License
 

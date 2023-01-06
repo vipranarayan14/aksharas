@@ -2,7 +2,10 @@ import { expect, describe, test } from "@jest/globals";
 
 import Aksharas, { TokenType, VarnaType } from "../src";
 
+import { Varna } from "../src/varna";
 
+const filterVarnas = (varnas: Varna[], varnaType: VarnaType) =>
+  varnas.filter((varna) => varna.type === varnaType);
 
 const input = "ॐ भूर्भुवः स्वः।";
 
@@ -173,6 +176,24 @@ const varnas = [
   { value: "अः", type: VarnaType.Svara },
 ];
 
+const svaras = [
+  { value: "ओ", type: VarnaType.Svara },
+  { value: "ऊ", type: VarnaType.Svara },
+  { value: "उ", type: VarnaType.Svara },
+  { value: "अः", type: VarnaType.Svara },
+  { value: "अः", type: VarnaType.Svara },
+];
+
+const vyanjanas = [
+  { value: "म्", type: VarnaType.Vyanjana },
+  { value: "भ्", type: VarnaType.Vyanjana },
+  { value: "र्", type: VarnaType.Vyanjana },
+  { value: "भ्", type: VarnaType.Vyanjana },
+  { value: "व्", type: VarnaType.Vyanjana },
+  { value: "स्", type: VarnaType.Vyanjana },
+  { value: "व्", type: VarnaType.Vyanjana },
+];
+
 const chars = [
   "ॐ",
   " ",
@@ -233,6 +254,8 @@ describe("Aksharas#analyse", () => {
 
   test("Results#varnas", () => {
     expect(results.varnas).toEqual(varnas);
+    expect(filterVarnas(results.varnas, VarnaType.Svara)).toEqual(svaras);
+    expect(filterVarnas(results.varnas, VarnaType.Vyanjana)).toEqual(vyanjanas);
   });
 
   test("Results#chars", () => {

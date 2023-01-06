@@ -3,7 +3,7 @@ import * as utils from "./utils";
 import { tokenize } from "./tokenize";
 
 import { Token, TokenType } from "./token";
-import { Varna } from "./varna";
+import { Varna, VarnaType } from "./varna";
 
 type Results = {
   all: Token[];
@@ -47,7 +47,8 @@ const analyse = (input: string): Results => {
 
 const Aksharas = {
   analyse,
-  TokenType,
 };
 
 export default Aksharas;
+
+export { TokenType, VarnaType };

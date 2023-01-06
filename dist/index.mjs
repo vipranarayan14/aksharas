@@ -1,4 +1,3 @@
-const $fab42eb3dee39b5b$export$5197f37c648cbac3 = (tokens)=>tokens.reduce((total, akshara)=>akshara.attributes ? total + akshara.attributes.varnasLength : total, 0);
 const $fab42eb3dee39b5b$export$829ee63b3dace6ab = (aksharas)=>aksharas.flatMap((akshara)=>akshara.attributes?.varnas);
 const $fab42eb3dee39b5b$export$99699e6242229250 = (tokens, tokenType)=>tokens.filter((token)=>token.type === tokenType);
 const $fab42eb3dee39b5b$export$a93666e9003b61ba = (vowelMark)=>({
@@ -262,7 +261,6 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
     const tokens = [];
     let pos = 0;
     let acc = "";
-    let varnasLength = 0;
     let svaraAcc = "";
     let vyanjanaAcc = "";
     let varnas = [];
@@ -270,7 +268,6 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
     const resetVariables = ()=>{
         pos = 0;
         acc = "";
-        varnasLength = 0;
         svaraAcc = "";
         vyanjanaAcc = "";
         varnas = [];
@@ -292,8 +289,7 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).Om[0]),
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).Om[1]), 
-                        ]),
-                        varnasLength: 2
+                        ])
                     });
                     break;
                 }
@@ -317,15 +313,13 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, acc)
-                        ]),
-                        varnasLength: 1
+                        ])
                     });
                     break;
                 }
                 if (char.isConsonant()) {
                     vyanjanaAcc += char.value;
                     if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
-                        varnasLength += 1;
                         state = $b4bfbd25bd11531b$var$State.Consonant;
                         break;
                     }
@@ -333,8 +327,7 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).Virama),
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).InherentA), 
-                        ]),
-                        varnasLength: 2
+                        ])
                     });
                     break;
                 }
@@ -345,8 +338,7 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, acc)
-                        ]),
-                        varnasLength: 1
+                        ])
                     });
                     break;
                 }
@@ -355,8 +347,7 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, acc)
-                        ]),
-                        varnasLength: 1
+                        ])
                     });
                     break;
                 }
@@ -369,8 +360,7 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).Virama),
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).InherentA), 
-                        ]),
-                        varnasLength: 2
+                        ])
                     });
                     break;
                 }
@@ -378,17 +368,16 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                     vyanjanaAcc += char.value;
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $b4bfbd25bd11531b$var$State.ConjunctConsonant;
                         varnas = varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc), 
                         ]);
+                        state = $b4bfbd25bd11531b$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc)
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
@@ -396,60 +385,52 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
                     vyanjanaAcc += char.value;
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $b4bfbd25bd11531b$var$State.ConjunctConsonant;
                         varnas = varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc), 
                         ]);
+                        state = $b4bfbd25bd11531b$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc)
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
                 if (char.isVowelMarkAttachment()) {
                     svaraAcc = (svaraAcc || (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).InherentA) + char.value;
                     if (nextChar.isAccent()) break;
-                    varnasLength += 1;
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).Virama),
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, svaraAcc), 
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
                 if (char.isVowelMark()) {
                     svaraAcc = (0, $fab42eb3dee39b5b$export$a93666e9003b61ba)(char.value);
                     if (nextChar.isVowelMarkAttachment()) break;
-                    varnasLength += 1;
                     createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).Virama),
                             new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, svaraAcc), 
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
             case $b4bfbd25bd11531b$var$State.ConjunctConsonant:
                 vyanjanaAcc = char.value;
                 if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
-                    varnasLength += 1;
                     state = $b4bfbd25bd11531b$var$State.Consonant;
                     break;
                 }
-                varnasLength += 2;
                 createToken((0, $66d137fe0087513e$export$f435f793048e7a0f).Akshara, {
                     varnas: varnas.concat([
                         new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).Virama),
                         new (0, $1a6233e1cbefb8e5$export$9a9b914922c5814b)((0, $1a6233e1cbefb8e5$export$43f5c03b889fb331).Svara, (0, $1a6233e1cbefb8e5$export$9aabccd6c029d20f).InherentA), 
-                    ]),
-                    varnasLength: varnasLength
+                    ])
                 });
                 break;
             default:
@@ -458,6 +439,7 @@ const $b4bfbd25bd11531b$export$660b2ee2d4fb4eff = (input)=>{
     }
     return tokens;
 };
+
 
 
 
@@ -470,7 +452,6 @@ const $149c1bd638913645$var$analyse = (input)=>{
     const invalidChars = $fab42eb3dee39b5b$export$99699e6242229250(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Invalid);
     const whitespaces = $fab42eb3dee39b5b$export$99699e6242229250(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Whitespace);
     const unrecognisedChars = $fab42eb3dee39b5b$export$99699e6242229250(tokens, (0, $66d137fe0087513e$export$f435f793048e7a0f).Unrecognised);
-    const varnasLength = $fab42eb3dee39b5b$export$5197f37c648cbac3(aksharas);
     return {
         all: tokens,
         aksharas: aksharas,
@@ -479,16 +460,16 @@ const $149c1bd638913645$var$analyse = (input)=>{
         symbols: symbols,
         invalid: invalidChars,
         whitespaces: whitespaces,
-        unrecognised: unrecognisedChars,
-        varnasLength: varnasLength
+        unrecognised: unrecognisedChars
     };
 };
 const $149c1bd638913645$var$Aksharas = {
     analyse: $149c1bd638913645$var$analyse,
-    TokenType: $66d137fe0087513e$export$f435f793048e7a0f
+    TokenType: $66d137fe0087513e$export$f435f793048e7a0f,
+    VarnaType: $1a6233e1cbefb8e5$export$43f5c03b889fb331
 };
 var $149c1bd638913645$export$2e2bcd8739ae039 = $149c1bd638913645$var$Aksharas;
 
 
-export {$149c1bd638913645$export$2e2bcd8739ae039 as default};
+export {$149c1bd638913645$export$2e2bcd8739ae039 as default, $66d137fe0087513e$export$f435f793048e7a0f as TokenType, $1a6233e1cbefb8e5$export$43f5c03b889fb331 as VarnaType};
 //# sourceMappingURL=index.mjs.map

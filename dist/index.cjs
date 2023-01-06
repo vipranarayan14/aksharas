@@ -8,7 +8,8 @@ function $parcel$export(e, n, v, s) {
 $parcel$defineInteropFlag(module.exports);
 
 $parcel$export(module.exports, "default", () => $882b6d93070905b3$export$2e2bcd8739ae039);
-const $9ba0f9a5c47c04f2$export$5197f37c648cbac3 = (tokens)=>tokens.reduce((total, akshara)=>akshara.attributes ? total + akshara.attributes.varnasLength : total, 0);
+$parcel$export(module.exports, "TokenType", () => $3aefcdddac337967$export$f435f793048e7a0f);
+$parcel$export(module.exports, "VarnaType", () => $bf01d1d1fdea4641$export$43f5c03b889fb331);
 const $9ba0f9a5c47c04f2$export$829ee63b3dace6ab = (aksharas)=>aksharas.flatMap((akshara)=>akshara.attributes?.varnas);
 const $9ba0f9a5c47c04f2$export$99699e6242229250 = (tokens, tokenType)=>tokens.filter((token)=>token.type === tokenType);
 const $9ba0f9a5c47c04f2$export$a93666e9003b61ba = (vowelMark)=>({
@@ -272,7 +273,6 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
     const tokens = [];
     let pos = 0;
     let acc = "";
-    let varnasLength = 0;
     let svaraAcc = "";
     let vyanjanaAcc = "";
     let varnas = [];
@@ -280,7 +280,6 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
     const resetVariables = ()=>{
         pos = 0;
         acc = "";
-        varnasLength = 0;
         svaraAcc = "";
         vyanjanaAcc = "";
         varnas = [];
@@ -302,8 +301,7 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).Om[0]),
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).Om[1]), 
-                        ]),
-                        varnasLength: 2
+                        ])
                     });
                     break;
                 }
@@ -327,15 +325,13 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, acc)
-                        ]),
-                        varnasLength: 1
+                        ])
                     });
                     break;
                 }
                 if (char.isConsonant()) {
                     vyanjanaAcc += char.value;
                     if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
-                        varnasLength += 1;
                         state = $da2f48c805d435e9$var$State.Consonant;
                         break;
                     }
@@ -343,8 +339,7 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).Virama),
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).InherentA), 
-                        ]),
-                        varnasLength: 2
+                        ])
                     });
                     break;
                 }
@@ -355,8 +350,7 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, acc)
-                        ]),
-                        varnasLength: 1
+                        ])
                     });
                     break;
                 }
@@ -365,8 +359,7 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, acc)
-                        ]),
-                        varnasLength: 1
+                        ])
                     });
                     break;
                 }
@@ -379,8 +372,7 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).Virama),
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).InherentA), 
-                        ]),
-                        varnasLength: 2
+                        ])
                     });
                     break;
                 }
@@ -388,17 +380,16 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                     vyanjanaAcc += char.value;
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $da2f48c805d435e9$var$State.ConjunctConsonant;
                         varnas = varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc), 
                         ]);
+                        state = $da2f48c805d435e9$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc)
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
@@ -406,60 +397,52 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
                     vyanjanaAcc += char.value;
                     if (nextChar.isJoiner()) break;
                     if (nextChar.isConsonant()) {
-                        state = $da2f48c805d435e9$var$State.ConjunctConsonant;
                         varnas = varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc), 
                         ]);
+                        state = $da2f48c805d435e9$var$State.ConjunctConsonant;
                         break;
                     }
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc)
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
                 if (char.isVowelMarkAttachment()) {
                     svaraAcc = (svaraAcc || (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).InherentA) + char.value;
                     if (nextChar.isAccent()) break;
-                    varnasLength += 1;
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).Virama),
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, svaraAcc), 
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
                 if (char.isVowelMark()) {
                     svaraAcc = (0, $9ba0f9a5c47c04f2$export$a93666e9003b61ba)(char.value);
                     if (nextChar.isVowelMarkAttachment()) break;
-                    varnasLength += 1;
                     createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                         varnas: varnas.concat([
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).Virama),
                             new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, svaraAcc), 
-                        ]),
-                        varnasLength: varnasLength
+                        ])
                     });
                     break;
                 }
             case $da2f48c805d435e9$var$State.ConjunctConsonant:
                 vyanjanaAcc = char.value;
                 if (nextChar.isNukta() || nextChar.isConsonantAttachment()) {
-                    varnasLength += 1;
                     state = $da2f48c805d435e9$var$State.Consonant;
                     break;
                 }
-                varnasLength += 2;
                 createToken((0, $3aefcdddac337967$export$f435f793048e7a0f).Akshara, {
                     varnas: varnas.concat([
                         new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Vyanjana, vyanjanaAcc + (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).Virama),
                         new (0, $bf01d1d1fdea4641$export$9a9b914922c5814b)((0, $bf01d1d1fdea4641$export$43f5c03b889fb331).Svara, (0, $bf01d1d1fdea4641$export$9aabccd6c029d20f).InherentA), 
-                    ]),
-                    varnasLength: varnasLength
+                    ])
                 });
                 break;
             default:
@@ -468,6 +451,7 @@ const $da2f48c805d435e9$export$660b2ee2d4fb4eff = (input)=>{
     }
     return tokens;
 };
+
 
 
 
@@ -480,7 +464,6 @@ const $882b6d93070905b3$var$analyse = (input)=>{
     const invalidChars = $9ba0f9a5c47c04f2$export$99699e6242229250(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Invalid);
     const whitespaces = $9ba0f9a5c47c04f2$export$99699e6242229250(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Whitespace);
     const unrecognisedChars = $9ba0f9a5c47c04f2$export$99699e6242229250(tokens, (0, $3aefcdddac337967$export$f435f793048e7a0f).Unrecognised);
-    const varnasLength = $9ba0f9a5c47c04f2$export$5197f37c648cbac3(aksharas);
     return {
         all: tokens,
         aksharas: aksharas,
@@ -489,13 +472,13 @@ const $882b6d93070905b3$var$analyse = (input)=>{
         symbols: symbols,
         invalid: invalidChars,
         whitespaces: whitespaces,
-        unrecognised: unrecognisedChars,
-        varnasLength: varnasLength
+        unrecognised: unrecognisedChars
     };
 };
 const $882b6d93070905b3$var$Aksharas = {
     analyse: $882b6d93070905b3$var$analyse,
-    TokenType: $3aefcdddac337967$export$f435f793048e7a0f
+    TokenType: $3aefcdddac337967$export$f435f793048e7a0f,
+    VarnaType: $bf01d1d1fdea4641$export$43f5c03b889fb331
 };
 var $882b6d93070905b3$export$2e2bcd8739ae039 = $882b6d93070905b3$var$Aksharas;
 

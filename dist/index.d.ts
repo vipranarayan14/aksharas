@@ -1,4 +1,4 @@
-enum TokenType {
+export enum TokenType {
     Akshara = "akshara",
     Symbol = "symbol",
     Whitespace = "whitespace",
@@ -14,7 +14,7 @@ declare class Token {
     readonly attributes?: TokenAttributes;
     constructor(type: TokenType, value: string, pos: number, attributes?: TokenAttributes);
 }
-enum VarnaType {
+export enum VarnaType {
     Svara = "svara",
     Vyanjana = "vyanjana"
 }
@@ -32,11 +32,11 @@ type Results = {
     chars: string[];
     invalid: Token[];
     unrecognised: Token[];
-    varnasLength: number;
 };
 declare const Aksharas: {
     analyse: (input: string) => Results;
     TokenType: typeof TokenType;
+    VarnaType: typeof VarnaType;
 };
 export default Aksharas;
 
